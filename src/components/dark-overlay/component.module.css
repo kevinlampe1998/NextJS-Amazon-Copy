@@ -1,0 +1,79 @@
+.darkOverlay {
+    height: 100vh;
+    width: 100vw;
+    top: 60px;
+    left: 0;
+    z-index: 100;
+    position: fixed;
+}
+
+.darkness {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.5;
+    display: none;
+    position: absolute;
+}
+
+.signInHover {
+    width: 500px;
+    height: 385px;
+    background: #fff;
+    position: absolute;
+    right: 70px;
+    display: none;
+    border-radius: 3px;
+    z-index: 2000;
+}
+
+.signInHover div:first-child {
+    text-align: center;
+    height: 78px;
+}
+
+.signInHover div:nth-child(2) {
+    display: flex;
+    border-top: 1px solid lightgrey;
+}
+
+.signInHover div:nth-child(2) > div:nth-child(2), .signInHover div:nth-child(2) > div:first-child {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    padding-left: 22px;
+    padding-top: 12px;
+    height: 100%;
+    font-size: 0.9rem;
+}
+
+.signInHover > div > button {
+    background: rgba(254, 216, 19, 1);
+    height: 34px;
+    width: 220px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 17px;
+}
+
+.signInHover > div > button:hover {
+    text-decoration: underline;
+}
+
+.signInHover > div:first-child p {
+    padding-top: 5px;
+}
+
+.signInHover > div:first-child span {
+    color: blue;
+    text-decoration: underline;
+}
+
+.signInHover > div:first-child span:hover {
+    color: red;
+}
+.signInHover div:nth-child(2) > div:first-child h4, .signInHover div:nth-child(2) > div:nth-child(2) h4 {
+    font-size: 1.4rem;
+}

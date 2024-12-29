@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ChevronDown, Search, ShoppingCart } from 'lucide-react';
 import styles from './component.module.css';
+import { showSignInHoverPartnerComponent, hideSignInHoverPartnerComponent } from "../dark-overlay/component";
 
 const Header = () => {
+
     return (
         <header className={styles.header}>
 
@@ -46,7 +48,11 @@ const Header = () => {
                 <ChevronDown size={20}/>
             </section>
             
-            <section className={styles.headerSignIn}>
+            <section
+                className={styles.headerSignIn}
+                onMouseEnter={showSignInHoverPartnerComponent}
+                onMouseLeave={hideSignInHoverPartnerComponent}
+            >
                 <p>Hello, sign in</p>
                 <div>
                     <strong>Account & Lists</strong>
@@ -54,9 +60,15 @@ const Header = () => {
                 </div>
             </section>
 
+            <section
+                className={styles.signInBottomArea}
+                onMouseEnter={showSignInHoverPartnerComponent}
+                onMouseLeave={hideSignInHoverPartnerComponent}  
+            ></section>
+
             <section className={styles.headerReturns}>
-                <p>Returns</p>
-                <strong>& Orders</strong>
+                    <p>Returns</p>
+                    <strong>& Orders</strong>
             </section>
 
             <section className={styles.headerCart}>

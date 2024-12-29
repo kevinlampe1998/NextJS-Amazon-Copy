@@ -6,6 +6,7 @@
     color: #fff;
     position: fixed;
     width: 100%;
+    z-index: 1000;
 }
 
 .header > * {
@@ -102,4 +103,19 @@
 
 .headerCart p {
     color: orange;
+}
+
+.signInBottomArea {
+    height: 4px;
+    width: 150px;
+    background: rgba(18, 25, 33, 1);
+    position: absolute;
+    right: 197px;
+    bottom: -3px;
+    border: none;
+    z-index: 1050;
+}
+
+.signInBottomArea:hover {
+    border: none;
 }
