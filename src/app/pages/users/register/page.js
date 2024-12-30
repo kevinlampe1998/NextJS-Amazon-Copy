@@ -4,11 +4,28 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import numbers from '@/lib/numbers';
 
 const Register = () => {
+    const [ user, setUser ] = useState({
+        name: '',
+        mobileNumberOrEmail: '',
+        password: ''
+    });
+    const [ reEnterPassword, setReEnterPassword ] = useState('');
+    const [ isNumber, setIsNumber ] = useState(0);
 
-    const register = (e) => {
+    const register = async (e) => {
         e.preventDefault();
+
+        const res = await fetch('/api/users/register', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(user)
+        });
+
+        const data = await res.json();
+        console.log('data', data);
     };
 
     const addParentPetrolBorder = (e) => {
@@ -20,6 +37,17 @@ const Register = () => {
         const parent = e.target.parentElement;
         parent.style.border = '3px solid rgb(255, 255, 255)';
     };
+
+    // useEffect(() => {
+    //     console.log('user', user);
+    //     console.log('reEnterPassword', reEnterPassword);
+    // });
+
+    useEffect(() => {
+        
+        setIsNumber(isNaN(user.mobileNumberOrEmail) ? 0 : 1);
+        console.log('isNumber', isNumber);
+    }, [user.mobileNumberOrEmail]);
 
     return (
         <div className={styles.register}>
@@ -42,6 +70,8 @@ const Register = () => {
                         <input placeholder='First and last name'
                             onFocus={addParentPetrolBorder}
                             onBlur={removeParentPetrolBorder}
+                            value={user.name}
+                            onChange={(e) => setUser(prev => ({ ...prev, name: e.target.value }))}
                         />
                     </div>
 
@@ -50,6 +80,8 @@ const Register = () => {
                         <input
                             onFocus={addParentPetrolBorder}
                             onBlur={removeParentPetrolBorder}
+                            value={user.mobileNumberOrEmail}
+                            onChange={(e) => setUser(prev => ({ ...prev, mobileNumberOrEmail: e.target.value }))}
                         />
                     </div>
 
@@ -59,6 +91,8 @@ const Register = () => {
                             placeholder='At least 6 characters'
                             onFocus={addParentPetrolBorder}
                             onBlur={removeParentPetrolBorder}
+                            value={user.password}
+                            onChange={(e) => setUser(prev => ({ ...prev, password: e.target.value }))}
                         />
                     </div>
 
@@ -69,6 +103,8 @@ const Register = () => {
                         <input
                             onFocus={addParentPetrolBorder}
                             onBlur={removeParentPetrolBorder}
+                            value={reEnterPassword}
+                            onChange={(e) => setReEnterPassword(e.target.value)}
                         />
                     </div>
 
