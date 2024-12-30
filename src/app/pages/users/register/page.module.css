@@ -1,0 +1,173 @@
+.register {
+    position: absolute;
+    z-index: 1000;
+    margin-top: -60px;
+    background: #fff;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 17px;
+    padding-right: 17px;
+}
+
+.register a {
+    color: rgb(9, 113, 124);
+    text-decoration: none;
+}
+
+.register a:hover {
+    color: rgb(218, 28, 28);
+    text-decoration: underline;
+}
+
+.register form {
+    width: 350px;
+    height: 610px;
+    border: 1px solid lightgrey;
+    text-align: center;
+    padding: 20px 20px 0 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.register form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.register form h2 {
+    font-size: 2.3rem;
+    font-weight: 100;
+}
+
+.register form label {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.register form > div div {
+    border: 3px solid #fff;
+    border-radius: 10px;
+    padding: 2px;
+    width: 100%;
+}
+
+/* .register form > div div:hover {
+    border: 3px solid rgb(2, 122, 110);
+} */
+
+.register form input {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.register form input:focus {
+    outline: none;
+    border: 1px solid #000;
+}
+
+.register form div p:first-of-type {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.register form div p span:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(27, 147, 165, 1);
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.register label:last-of-type {
+    margin-top: 8px;
+}
+
+.register form button {
+    width: 100%;
+    height: 30px;
+    margin-top: 12px;
+    background: rgba(254, 216,19, 1);
+    border-radius: 30px;
+    border: none;
+}
+
+.register > form > section:first-of-type {
+    margin-top: 35px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid lightgrey;
+    text-align: left;
+}
+
+.register > form > section:first-of-type a {
+    text-decoration: underline;
+}
+
+.register > form > section:nth-of-type(2) {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.register > form > section:last-of-type {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.register > form > section:last-of-type > p > a {
+    padding-left: 5px;
+}
+
+.signInChevron {
+    transform: translateY(3px);
+}
+
+.register > div {
+    margin-top: 30px;
+    border-top: 1px solid lightgrey;
+    width: 100%;
+    padding-top: 42px;
+    text-align: center;
+}
+
+.register > div > div {
+    display: flex;
+    justify-content: center ;
+    gap: 25px;
+}
+
+.register > div > p {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    color: #555;
+}
+
+.register > div > p > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #555;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    padding-bottom: 2px;
+    margin-right: 5px;
+}

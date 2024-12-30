@@ -7,6 +7,7 @@
     position: fixed;
     width: 100%;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .header > * {
@@ -117,5 +118,22 @@
 }
 
 .signInBottomArea:hover {
+    border: none;
+}
+
+.signInTriangle {
+    height: 20px;
+    width: 20px;
+    background: #fff;
+    position: absolute;
+    right: 216px;
+    bottom: -18px;
+    z-index: 1051;
+    transform: rotate(45deg);
+    border: none;
+    display: none;
+}
+
+.signInTriangle:hover {
     border: none;
 }

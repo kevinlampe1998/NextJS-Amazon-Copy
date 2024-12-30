@@ -27,8 +27,15 @@
     z-index: 2000;
 }
 
+.signInHover p:hover {
+    text-decoration: underline;
+    color: red;
+}
+
 .signInHover div:first-child {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 78px;
 }
 
@@ -62,7 +69,7 @@
     text-decoration: underline;
 }
 
-.signInHover > div:first-child p {
+.signInHover > div:first-child a {
     padding-top: 5px;
 }
 

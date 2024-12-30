@@ -1,21 +1,27 @@
 'use client';
 import styles from './component.module.css';
+import { useRouter } from 'next/navigation';
 
 export const showSignInHoverPartnerComponent = () => {
     const partnerComponent = document.querySelector('#signInHover');
     const darkness = document.querySelector('#darkness');
+    const signInTriangle = document.querySelector('#signInTriangle');
     partnerComponent.style.display = 'block';
     darkness.style.display = 'block';
+    signInTriangle.style.display = 'block';
 };
 
 export const hideSignInHoverPartnerComponent = () => {
     const partnerComponent = document.querySelector('#signInHover');
     const darkness = document.querySelector('#darkness');
+    const signInTriangle = document.querySelector('#signInTriangle');
     partnerComponent.style.display = 'none';
     darkness.style.display = 'none';
+    signInTriangle.style.display = 'none';
 };
 
 const DarkOverlay = () => {
+  const router = useRouter();
 
     return (
       <div className={styles.darkOverlay}>
@@ -29,7 +35,7 @@ const DarkOverlay = () => {
         >
           <div>
             <button>Sign In</button>
-            <p>New Costumer? <span>Start here.</span></p>
+            <a>New Costumer? <span onClick={(e) => (e.preventDefault(), router.push('/pages/users/register'))}>Start here.</span></a>
           </div>
           <div>
             <div>

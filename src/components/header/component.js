@@ -12,7 +12,7 @@ const Header = () => {
         <header className={styles.header}>
 
             <Link
-                href=''
+                href='/'
                 className={styles.amazonHeaderLogoContainer}
             >
                 <Image
@@ -20,6 +20,7 @@ const Header = () => {
                     width='120'
                     height='50'
                     alt="Amazon header logo"
+                    priority
                 />
             </Link>
         
@@ -59,6 +60,13 @@ const Header = () => {
                     <ChevronDown size={20}/>
                 </div>
             </section>
+
+            <section
+                className={styles.signInTriangle}
+                onMouseEnter={showSignInHoverPartnerComponent}
+                onMouseLeave={hideSignInHoverPartnerComponent}
+                id="signInTriangle"
+            ></section>
 
             <section
                 className={styles.signInBottomArea}
