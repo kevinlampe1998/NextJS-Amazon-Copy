@@ -7,7 +7,6 @@ import { ChevronRight } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import numbers from '@/lib/numbers';
 import countryDialingCodes from '@/lib/countryDialingCodes';
-import { useRouter } from 'next/navigation';
 
 const USData = countryDialingCodes.filter(country => country.country === 'United States')[0];
 
@@ -21,7 +20,6 @@ const Register = () => {
     const [ isNumber, setIsNumber ] = useState(false);
     const countryList = useRef();
     const [ selectedCountryForMobileNumber, setSelectedCountry ] = useState();
-    const router = useRouter();
 
     const nameInput = useRef();
     const mobileNumberOrEmailInput = useRef();
@@ -118,7 +116,7 @@ const Register = () => {
             <form onSubmit={register}>
 
                 <div>
-                    <h2>Create Account</h2>
+                    <h2>Create Business Account</h2>
 
                     <label>Your name</label>
                     <div>
@@ -239,8 +237,8 @@ const Register = () => {
                 </section>
 
                 <section>
-                    <strong>Do you want to sell?</strong>
-                    <Link href='/pages/sellers/register'>Create a free seller account</Link>
+                    <strong>Do you want to create a buyer account?</strong>
+                    <Link href='/pages/users/register'>Create a free buyer account</Link>
                 </section>
 
                 <section>
