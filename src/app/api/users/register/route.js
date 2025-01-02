@@ -36,7 +36,7 @@
 
             console.log('user', user);
 
-            // const isNumber = validator.isNumeric();
+            const isNumber = validator.isNumeric(mobileNumberOrEmail);
 
             return NextResponse.json({ message: 'You are successful registered!', success: 1 });
 

@@ -14,6 +14,7 @@ const Register = () => {
     const [ user, setUser ] = useState({
         name: '',
         mobileNumberOrEmail: '',
+        countryDialingCode: '',
         password: ''
     });
     const [ reEnterPassword, setReEnterPassword ] = useState('');
@@ -57,15 +58,15 @@ const Register = () => {
             user.password !== reEnterPasswordInput.current.value
         ) return;
 
+        user.countryDialingCode = selectedCountryForMobileNumber;
 
+        const res = await fetch('/api/sellers/register', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(user)
+        });
 
-        // const res = await fetch('/api/users/register', {
-        //     method: 'POST', headers: { 'content-type': 'application/json' },
-        //     body: JSON.stringify(user)
-        // });
-
-        // const data = await res.json();
-        // console.log('data', data);
+        const data = await res.json();
+        console.log('data', data);
     };
 
     const addParentPetrolBorder = (e) => {
@@ -82,6 +83,11 @@ const Register = () => {
         countryList.current.style.display = 'block';
     };
 
+    const changeDialingCode = (countryCode) => {
+        setSelectedCountry(countryCode);
+        countryList.current.style.display = 'none';
+    };
+
     useEffect(() => {
         
         setIsNumber(user.mobileNumberOrEmail.split('').every(digit => numbers.includes(digit)));
@@ -89,18 +95,27 @@ const Register = () => {
 
     }, [user.mobileNumberOrEmail]);
 
+    
     useEffect(() => {
         setIsNumber(false);
-
+        
         setSelectedCountry(`${USData.code} ${USData.dialCode}`);
         
     }, []);
-
+    
     useEffect(() => {
         selectedCountryForMobileNumber && console.log(selectedCountryForMobileNumber);
     }, [selectedCountryForMobileNumber]);
-
+    
     useEffect(() => {}, [user.mobileNumberOrEmail]);
+    
+    useEffect(() => {
+        console.log('selectedCountryForMobileNumber', selectedCountryForMobileNumber);
+    }, [selectedCountryForMobileNumber]);
+    
+    useEffect(() => {
+        !isNumber && setSelectedCountry('');
+    }, [isNumber]);
 
     return (
         <div className={styles.register}>
@@ -116,7 +131,7 @@ const Register = () => {
             <form onSubmit={register}>
 
                 <div>
-                    <h2>Create Business Account</h2>
+                    <h2>Create Seller Account</h2>
 
                     <label>Your name</label>
                     <div>
@@ -150,6 +165,7 @@ const Register = () => {
                                 isNumber &&
 
                                 <button
+                                    type='button'
                                     onClick={showCountryList}   
                                 >{selectedCountryForMobileNumber}</button>
                             }
@@ -269,10 +285,13 @@ const Register = () => {
                 className={styles.countryDialingCodes}
                 style={{ width: '220px' }}
                 ref={countryList}
-            >
+                >
                 {
                     countryDialingCodes.map((country, index) => (
-                        <section key={index}>
+                        <section
+                            key={index}
+                            onClick={() => changeDialingCode(`${country.code} ${country.dialCode}`)}
+                        >
                             <p>{country.country}</p>
                             <p>{country.dialCode}</p>
                         </section>
