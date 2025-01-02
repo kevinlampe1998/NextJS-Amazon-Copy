@@ -7,6 +7,7 @@ import { ChevronRight } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import numbers from '@/lib/numbers';
 import countryDialingCodes from '@/lib/countryDialingCodes';
+import domainName from '@/lib/domainName';
 
 const USData = countryDialingCodes.filter(country => country.country === 'United States')[0];
 
@@ -60,7 +61,7 @@ const Register = () => {
 
         user.countryDialingCode = selectedCountryForMobileNumber;
 
-        const res = await fetch('/api/sellers/register', {
+        const res = await fetch(`${process.env.NODE_ENV === production ? domainName : ''}/api/sellers/register`, {
             method: 'POST', headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)
         });
