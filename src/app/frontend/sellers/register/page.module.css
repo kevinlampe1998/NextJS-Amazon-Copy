@@ -244,3 +244,8 @@
     font-size: 1.1rem;
     padding: 2px 0;
 }
+
+.responseErrorMessage {
+    display: none;
+    color: red;
+}

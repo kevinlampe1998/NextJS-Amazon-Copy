@@ -1,20 +1,31 @@
 'use client';
 
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { createContext } from "react";
 
 const reducer = (state, action) => {
 
+    console.log('action.type', action.type);
+    console.log('action.payload', action.payload);
+
+    if (action.type === 'seller_registered') {
+        return { ...state, seller: action.payload };
+    };
 
 
     return state;
 };
 
-const Context = createContext();
+export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
     const [ clientDB, dispatch ] = useReducer(reducer, {
-        user: undefined
+        user: undefined,
+        seller: undefined
+    });
+
+    useEffect(() => {
+        console.log('clientDB', clientDB);
     });
 
     return (

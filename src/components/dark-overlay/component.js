@@ -35,7 +35,7 @@ const DarkOverlay = () => {
         >
           <div>
             <button>Sign In</button>
-            <a>New Costumer? <span onClick={(e) => (e.preventDefault(), router.push('/pages/users/register'))}>Start here.</span></a>
+            <a>New Costumer? <span onClick={(e) => (e.preventDefault(), router.push('/frontend/users/register'))}>Start here.</span></a>
           </div>
           <div>
             <div>
@@ -56,8 +56,6 @@ const DarkOverlay = () => {
               <p>Subscribe & Save Items</p>
               <p>Membership & Subscriptions</p>
               <p>Music & Library</p>
-              <p></p>
-              <p></p>
             </div>
           </div>
         </div>

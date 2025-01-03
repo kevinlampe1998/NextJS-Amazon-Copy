@@ -4,10 +4,12 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import numbers from '@/lib/numbers';
 import countryDialingCodes from '@/lib/countryDialingCodes';
 import domainName from '@/lib/domainName';
+import { Context } from '@/components/context-provider/component';
+import { useRouter } from 'next/navigation';
 
 const USData = countryDialingCodes.filter(country => country.country === 'United States')[0];
 
@@ -33,6 +35,10 @@ const Register = () => {
     const passwordError = useRef();
     const reEnterPasswordError = useRef();
 
+    const { clientDB, dispatch } = useContext(Context);
+    const router = useRouter();
+    const responseErrorMessage = useRef();
+
     const register = async (e) => {
         e.preventDefault();
 
@@ -48,7 +54,6 @@ const Register = () => {
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordInput.current.style.border = '2px solid red');
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordError.current.style.display = 'flex')
 
-
         if (
             user.name === '' ||
             user.mobileNumberOrEmail === '' ||
@@ -58,17 +63,17 @@ const Register = () => {
 
         user.countryDialingCode = selectedCountryForMobileNumber;
 
-        console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-        console.log('domainName', domainName);
-        console.log(`${process.env.NODE_ENV === 'production' ? domainName : ''}api/sellers/register`);
-
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/register`, {
             method: 'POST', headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user)
         });
 
         const data = await res.json();
-        console.log('data', data);
+
+        data.success && dispatch({ type: 'seller_registered', payload: data.seller });
+        data.success && router.push('/');
+
+        data.error && (responseErrorMessage.current.style.display = 'block');
     };
 
     const addParentPetrolBorder = (e) => {
@@ -105,15 +110,7 @@ const Register = () => {
         
     }, []);
     
-    useEffect(() => {
-        selectedCountryForMobileNumber && console.log(selectedCountryForMobileNumber);
-    }, [selectedCountryForMobileNumber]);
-    
     useEffect(() => {}, [user.mobileNumberOrEmail]);
-    
-    useEffect(() => {
-        console.log('selectedCountryForMobileNumber', selectedCountryForMobileNumber);
-    }, [selectedCountryForMobileNumber]);
     
     useEffect(() => {
         !isNumber && setSelectedCountry('');
@@ -129,6 +126,11 @@ const Register = () => {
                 style={{ width: "auto" }}
                 alt='Amazon Logo with background white'
             />
+
+            <div
+                ref={responseErrorMessage}
+                className={styles.responseErrorMessage}
+            >Something went wrong</div>
 
             <form onSubmit={register}>
 

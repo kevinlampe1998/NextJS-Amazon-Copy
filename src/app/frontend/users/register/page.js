@@ -240,7 +240,7 @@ const Register = () => {
 
                 <section>
                     <strong>Do you want to sell?</strong>
-                    <Link href='/pages/sellers/register'>Create a free seller account</Link>
+                    <Link href='/frontend/sellers/register'>Create a free seller account</Link>
                 </section>
 
                 <section>
