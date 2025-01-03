@@ -36,7 +36,6 @@ const Register = () => {
     const register = async (e) => {
         e.preventDefault();
 
-        console.log('nameInput',nameInput);
         user.name === '' && (nameInput.current.style.border = '2px solid red');
         user.name === '' && (nameError.current.style.display = 'flex');
 
@@ -45,8 +44,6 @@ const Register = () => {
 
         user.password === '' && (passwordInput.current.style.border = '2px solid red');
         user.password === '' && (passwordError.current.style.display = 'flex');
-
-        console.log('reEnterPasswordInput.current.value', reEnterPasswordInput.current.value);
 
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordInput.current.style.border = '2px solid red');
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordError.current.style.display = 'flex')
