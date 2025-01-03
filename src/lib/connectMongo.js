@@ -6,6 +6,7 @@ const connectMongo = async () => {
 
         if (mongoose.connection.readyState !== 1) {
             console.log("Connecting to MongoDB...");
+            console.log('process.env.MONGODB_URI', process.env.MONGODB_URI);
             await mongoose.connect(process.env.MONGODB_URI,
                 // { 
                 //     useNewUrlParser: true, 
