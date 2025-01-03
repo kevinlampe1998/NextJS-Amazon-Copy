@@ -60,7 +60,7 @@ const Register = () => {
 
         console.log('process.env.NODE_ENV', process.env.NODE_ENV);
         console.log('domainName', domainName);
-        console.log(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/register`);
+        console.log(`${process.env.NODE_ENV === 'production' ? domainName : ''}api/sellers/register`);
 
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/register`, {
             method: 'POST', headers: { 'content-type': 'application/json' },
