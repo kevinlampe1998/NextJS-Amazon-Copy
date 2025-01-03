@@ -59,6 +59,7 @@ const Register = () => {
         user.countryDialingCode = selectedCountryForMobileNumber;
 
         console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+        console.log('domainName', domainName);
         console.log(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/register`);
 
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/register`, {
