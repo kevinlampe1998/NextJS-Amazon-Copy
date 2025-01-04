@@ -15,11 +15,12 @@ export default function RootLayout({ children }) {
         <ContextProvider>
           <Header/>
 
-          <DarkOverlay/>
-
           <main>
             {children}
           </main>
+
+          <DarkOverlay/>
+            
         </ContextProvider>
       </body>
     </html>

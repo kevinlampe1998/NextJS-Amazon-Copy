@@ -5,8 +5,29 @@ import Image from "next/image";
 import { MapPin, ChevronDown, Search, ShoppingCart } from 'lucide-react';
 import styles from './component.module.css';
 import { showSignInHoverPartnerComponent, hideSignInHoverPartnerComponent } from "../dark-overlay/component";
+import { useEffect, useContext } from "react";
+import { Context } from "../context-provider/component";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+    const { clientDB, dispatch } = useContext(Context);
+    const router = useRouter();
+
+    const checkCookieAtStart = async () => {
+        const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/check-cookie`, {
+            credentials: 'include'
+        });
+
+        const data = await res.json();
+
+        data.success && dispatch({ type: 'set_seller', payload: data.user });
+
+        console.log('data', data);
+    };
+
+    useEffect(() => {
+        checkCookieAtStart();
+    }, []);
 
     return (
         <header className={styles.header}>
@@ -23,69 +44,95 @@ const Header = () => {
                     priority
                 />
             </Link>
+
+            {
+                !clientDB.seller &&
+
+                <>
+                    <section>
+                        <MapPin size={20}/>
+                        <div>
+                            <p>Deliver to</p>
+                            <strong>Germany</strong>
+                        </div>
+                    </section>
+
+                    <nav>
+                        <button>
+                            <p>All</p>
+                            <ChevronDown size={20}/>
+                        </button>
+                        <input placeholder="Search Amazon"/>
+                        <div className={styles.headerSearchButton}>
+                            <Search size={20}/>
+                        </div>
+                    </nav>
+
+                    <section className={styles.headerLanguage}>
+                        <div>🇺🇸</div>
+                        <strong>EN</strong>
+                        <ChevronDown size={20}/>
+                    </section>
+                
+                </>
+            }
         
-            <section>
-                <MapPin size={20}/>
-                <div>
-                    <p>Deliver to</p>
-                    <strong>Germany</strong>
-                </div>
-            </section>
-
-            <nav>
-                <button>
-                    <p>All</p>
-                    <ChevronDown size={20}/>
-                </button>
-                <input placeholder="Search Amazon"/>
-                <div className={styles.headerSearchButton}>
-                    <Search size={20}/>
-                </div>
-            </nav>
-
-            <section className={styles.headerLanguage}>
-                <div>🇺🇸</div>
-                <strong>EN</strong>
-                <ChevronDown size={20}/>
-            </section>
             
             <section
                 className={styles.headerSignIn}
-                onMouseEnter={showSignInHoverPartnerComponent}
-                onMouseLeave={hideSignInHoverPartnerComponent}
+                onMouseEnter={clientDB.seller ? undefined : showSignInHoverPartnerComponent}
+                onMouseLeave={clientDB.seller ? undefined : hideSignInHoverPartnerComponent}
+                onClick={() =>  
+                    clientDB.seller ? router.push('/frontend/sellers/profile')
+                    : clientDB.user ? router.push('/frontend/users/profile')
+                    : router.push('/frontend/users/sign-in')}
             >
-                <p>Hello, sign in</p>
-                <div>
-                    <strong>Account & Lists</strong>
-                    <ChevronDown size={20}/>
-                </div>
+                <p>Hello, {clientDB.seller ? clientDB.seller.name : 'sign in'}</p>
+
+                {
+                    !clientDB.seller &&
+
+                        <div>
+                            <strong>Account & Lists</strong>
+                            <ChevronDown size={20}/>
+                        </div>
+
+                }
             </section>
 
-            <section
-                className={styles.signInTriangle}
-                onMouseEnter={showSignInHoverPartnerComponent}
-                onMouseLeave={hideSignInHoverPartnerComponent}
-                id="signInTriangle"
-            ></section>
+            {
+                !clientDB.seller &&
 
-            <section
-                className={styles.signInBottomArea}
-                onMouseEnter={showSignInHoverPartnerComponent}
-                onMouseLeave={hideSignInHoverPartnerComponent}  
-            ></section>
+                <>
+                    <section
+                        className={styles.signInTriangle}
+                        onMouseEnter={showSignInHoverPartnerComponent}
+                        onMouseLeave={hideSignInHoverPartnerComponent}
+                        id="signInTriangle"
+                    ></section>
 
-            <section className={styles.headerReturns}>
-                    <p>Returns</p>
-                    <strong>& Orders</strong>
-            </section>
+                    <section
+                        className={styles.signInBottomArea}
+                        onMouseEnter={showSignInHoverPartnerComponent}
+                        onMouseLeave={hideSignInHoverPartnerComponent}  
+                    ></section>
 
-            <section className={styles.headerCart}>
-                <div>
-                    <p>0</p>
-                    <ShoppingCart size={20} className={styles.headerShoppingCartLogo}/>
-                </div>
-                <strong>Cart</strong>
-            </section>
+                    <section className={styles.headerReturns}>
+                            <p>Returns</p>
+                            <strong>& Orders</strong>
+                    </section>
+
+                    <section className={styles.headerCart}>
+                        <div>
+                            <p>0</p>
+                            <ShoppingCart size={20} className={styles.headerShoppingCartLogo}/>
+                        </div>
+                        <strong>Cart</strong>
+                    </section>
+                
+                </>
+            }
+
 
         </header>
     );

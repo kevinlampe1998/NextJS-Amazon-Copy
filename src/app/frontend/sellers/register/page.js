@@ -70,7 +70,7 @@ const Register = () => {
 
         const data = await res.json();
 
-        data.success && dispatch({ type: 'seller_registered', payload: data.seller });
+        data.success && dispatch({ type: 'set_seller', payload: data.seller });
         data.success && router.push('/');
 
         data.error && (responseErrorMessage.current.style.display = 'block');
@@ -258,7 +258,7 @@ const Register = () => {
 
                 <section>
                     <strong>Do you want to create a buyer account?</strong>
-                    <Link href='/pages/users/register'>Create a free buyer account</Link>
+                    <Link href='/frontend/users/register'>Create a free buyer account</Link>
                 </section>
 
                 <section>

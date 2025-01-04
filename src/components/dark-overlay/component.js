@@ -15,7 +15,7 @@ export const hideSignInHoverPartnerComponent = () => {
     const partnerComponent = document.querySelector('#signInHover');
     const darkness = document.querySelector('#darkness');
     const signInTriangle = document.querySelector('#signInTriangle');
-    partnerComponent.style.display = 'none';
+    partnerComponent.style.zIndex = '100';
     darkness.style.display = 'none';
     signInTriangle.style.display = 'none';
 };

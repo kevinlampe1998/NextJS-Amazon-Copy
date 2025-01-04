@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     console.log('action.type', action.type);
     console.log('action.payload', action.payload);
 
-    if (action.type === 'seller_registered') {
+    if (action.type === 'set_seller') {
         return { ...state, seller: action.payload };
     };
 
@@ -20,12 +20,8 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
     const [ clientDB, dispatch ] = useReducer(reducer, {
-        user: undefined,
+        buyer: undefined,
         seller: undefined
-    });
-
-    useEffect(() => {
-        console.log('clientDB', clientDB);
     });
 
     return (

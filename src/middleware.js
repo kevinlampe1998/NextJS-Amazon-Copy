@@ -2,15 +2,20 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
     const { pathname } = req.nextUrl;
+    console.log('pathname', pathname);
+
     const cookie = req.cookies.get('user');
+    console.log('cookie', cookie);
 
     if (
-            // !cookie && pathname !== '/' &&
-            !cookie &&
-            !pathname.startsWith('/sellers/register')
+
+            !cookie && pathname !== '/' &&
+            !pathname.startsWith('/frontend/sellers/register') &&
+            !pathname.startsWith('/frontend/users/register')
+
         ) {
         const url = req.nextUrl.clone();
-        url.pathname = '/sellers/register';
+        url.pathname = '/frontend/users/sign-in';
         return NextResponse.redirect(url);
     }
 

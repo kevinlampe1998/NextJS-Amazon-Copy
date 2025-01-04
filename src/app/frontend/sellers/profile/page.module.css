@@ -1,0 +1,14 @@
+.sellersProfile {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sellersProfile div {
+    width: 300px;
+    height: 30px;
+    margin-top: 12px;
+    background: rgba(254, 216,19, 1);
+    border-radius: 30px;
+    border: none;
+}
