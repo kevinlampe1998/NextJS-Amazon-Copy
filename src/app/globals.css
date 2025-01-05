@@ -3,11 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: sans-serif ;
+  font-family: sans-serif;
   font-size: 12px;
 }
 
 main {
   margin-top: 60px;
+  background: lightblue;
+  min-height: 90vh;
 }
-

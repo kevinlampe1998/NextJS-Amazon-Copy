@@ -8,10 +8,17 @@ const reducer = (state, action) => {
     console.log('action.type', action.type);
     console.log('action.payload', action.payload);
 
-    if (action.type === 'set_seller') {
+    if (action.type === 'set_seller')
         return { ...state, seller: action.payload };
-    };
 
+    if (action.type === 'remove_seller')
+        return { ...state, seller: undefined };
+    
+    if (action.type === 'set_buyer')
+        return { ...state, buyer: action.payload };
+
+    if (action.type === 'remove_buyer')
+        return { ...state, buyer: undefined };
 
     return state;
 };
@@ -22,6 +29,10 @@ const ContextProvider = ({ children }) => {
     const [ clientDB, dispatch ] = useReducer(reducer, {
         buyer: undefined,
         seller: undefined
+    });
+
+    useEffect(() => {
+        console.log('clientDB', clientDB);
     });
 
     return (

@@ -12,8 +12,8 @@
     width: 100%;
     background: #000;
     opacity: 0.5;
-    display: none;
     position: absolute;
+    z-index: 105;
 }
 
 .signInHover {
@@ -22,9 +22,8 @@
     background: #fff;
     position: absolute;
     right: 70px;
-    display: none;
     border-radius: 3px;
-    z-index: 2000;
+    z-index: 110;
 }
 
 .signInHover button, .signInHover span, .signInHover p {

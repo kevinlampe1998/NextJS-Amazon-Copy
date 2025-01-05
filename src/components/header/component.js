@@ -20,9 +20,12 @@ const Header = () => {
 
         const data = await res.json();
 
-        data.success && dispatch({ type: 'set_seller', payload: data.user });
-
         console.log('data', data);
+
+        data.success && data.user.role === 'seller' &&
+            dispatch({ type: 'set_seller', payload: data.user });
+        data.success && data.user.role === 'buyer' &&
+            dispatch({ type: 'set_buyer', payload: data.user });
     };
 
     useEffect(() => {
@@ -84,10 +87,16 @@ const Header = () => {
                 onMouseLeave={clientDB.seller ? undefined : hideSignInHoverPartnerComponent}
                 onClick={() =>  
                     clientDB.seller ? router.push('/frontend/sellers/profile')
-                    : clientDB.user ? router.push('/frontend/users/profile')
+                    : clientDB.buyer ? router.push('/frontend/users/profile')
                     : router.push('/frontend/users/sign-in')}
             >
-                <p>Hello, {clientDB.seller ? clientDB.seller.name : 'sign in'}</p>
+                <p>
+                    Hello, {
+                        clientDB.seller ? clientDB.seller.name
+                            : clientDB.buyer ? clientDB.buyer.name
+                            :'sign in'
+                    }
+                </p>
 
                 {
                     !clientDB.seller &&

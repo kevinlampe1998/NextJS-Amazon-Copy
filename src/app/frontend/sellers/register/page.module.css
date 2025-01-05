@@ -154,7 +154,7 @@
     transform: translateY(3px);
 }
 
-.register > div:first-of-type {
+.register > div:nth-of-type(2) {
     margin-top: 30px;
     border-top: 1px solid lightgrey;
     width: 100%;

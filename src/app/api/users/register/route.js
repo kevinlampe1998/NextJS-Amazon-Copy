@@ -1,50 +1,48 @@
-    import { NextResponse } from "next/server";
-    import User from "@/models/User";
-    import connectMongo from "@/lib/connectMongo";
-    import validator from 'validator';
+import { NextResponse } from "next/server";
+import connectMongo from "@/lib/connectMongo";
+import User from "@/models/User";
+import numbers from "@/lib/numbers";
 
-    export const POST = async (req) => {
-        try {
+export const POST = async (req) => {
+    try {
 
-            await connectMongo();
-            
-            const body = await req.json();
-            console.log('body', body);
-            const { name, mobileNumberOrEmail, password } = body;
+        await connectMongo();
 
-            const user = { name };
+        const body = await req.json();
+        console.log('body', body);
 
-            const isStrongPassword = validator.isStrongPassword(password, {
-                minLength: 5,
-                minLowercase: 0,
-                minUppercase: 0,
-                minNumbers: 0,
-                minSymbols: 0,
-            });
-            console.log('isStrongPassword', isStrongPassword);
+        const { name, mobileNumberOrEmail, countryDialingCode, password } = body;
 
-            if (!isStrongPassword) return NextResponse.json({
-                message: 'Password not strong enough!', error: 1
-            })
-            isStrongPassword && (user.password = password);
+        const isEmail = mobileNumberOrEmail.includes('@' && '.');
 
-            console.log('user', user);
+        const isNumber = mobileNumberOrEmail.split('').every(digit => numbers.includes(digit));
 
-            const isEmail = validator.isEmail(mobileNumberOrEmail);
-            console.log('isEmail', isEmail);
-            isEmail && (user.email = mobileNumberOrEmail);
+        const mobileNumber = (isNumber ? mobileNumberOrEmail : ''); 
+        const email = (isEmail ? mobileNumberOrEmail : '');
 
-            console.log('user', user);
+        const newBuyer = new User({ role: 'buyer', name, password, mobileNumber, countryDialingCode, email });
 
-            const isNumber = validator.isNumeric(mobileNumberOrEmail);
+        const buyer = await newBuyer.save();
 
-            return NextResponse.json({ message: 'You are successful registered!', success: 1 });
+        buyer.password = undefined;
 
-        } catch(err) {
-            
-            console.log('Error on POST Route /users/register', err);
-            console.log('Error on POST Route /users/register');
-            return NextResponse.json({ message: 'Something went wrong!', error: 1 });
+        const res = NextResponse.json({ message: 'You are successful registered!', success: 1, buyer });
 
-        }
-    };
+        res.cookies.set('user', buyer._id.toString(), {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 60 * 60,
+            path: '/',
+        });
+
+        return res;
+
+    } catch(err) {
+
+        console.log('Error on POST Route /sellers/register', err);
+        console.log('Error on POST Route /sellers/register');
+        return NextResponse.json({ message: 'Error on POST Route /sellers/register!', error: 1 });
+
+    }
+};

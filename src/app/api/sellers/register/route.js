@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import connectMongo from "@/lib/connectMongo";
 import User from "@/models/User";
 import numbers from "@/lib/numbers";
-import { serialize } from "cookie";
 
 export const POST = async (req) => {
     try {

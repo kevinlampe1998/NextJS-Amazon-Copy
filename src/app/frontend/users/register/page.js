@@ -4,9 +4,11 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import numbers from '@/lib/numbers';
 import countryDialingCodes from '@/lib/countryDialingCodes';
+import domainName from '@/lib/domainName';
+import { Context } from '@/components/context-provider/component';
 import { useRouter } from 'next/navigation';
 
 const USData = countryDialingCodes.filter(country => country.country === 'United States')[0];
@@ -15,13 +17,13 @@ const Register = () => {
     const [ user, setUser ] = useState({
         name: '',
         mobileNumberOrEmail: '',
+        countryDialingCode: '',
         password: ''
     });
     const [ reEnterPassword, setReEnterPassword ] = useState('');
     const [ isNumber, setIsNumber ] = useState(false);
     const countryList = useRef();
     const [ selectedCountryForMobileNumber, setSelectedCountry ] = useState();
-    const router = useRouter();
 
     const nameInput = useRef();
     const mobileNumberOrEmailInput = useRef();
@@ -33,10 +35,13 @@ const Register = () => {
     const passwordError = useRef();
     const reEnterPasswordError = useRef();
 
+    const { clientDB, dispatch } = useContext(Context);
+    const router = useRouter();
+    const responseErrorMessage = useRef();
+
     const register = async (e) => {
         e.preventDefault();
 
-        console.log('nameInput',nameInput);
         user.name === '' && (nameInput.current.style.border = '2px solid red');
         user.name === '' && (nameError.current.style.display = 'flex');
 
@@ -46,11 +51,8 @@ const Register = () => {
         user.password === '' && (passwordInput.current.style.border = '2px solid red');
         user.password === '' && (passwordError.current.style.display = 'flex');
 
-        console.log('reEnterPasswordInput.current.value', reEnterPasswordInput.current.value);
-
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordInput.current.style.border = '2px solid red');
         user.password !== reEnterPasswordInput.current.value && (reEnterPasswordError.current.style.display = 'flex')
-
 
         if (
             user.name === '' ||
@@ -59,15 +61,19 @@ const Register = () => {
             user.password !== reEnterPasswordInput.current.value
         ) return;
 
+        user.countryDialingCode = selectedCountryForMobileNumber;
 
+        const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/users/register`, {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(user)
+        });
 
-        // const res = await fetch('/api/users/register', {
-        //     method: 'POST', headers: { 'content-type': 'application/json' },
-        //     body: JSON.stringify(user)
-        // });
+        const data = await res.json();
 
-        // const data = await res.json();
-        // console.log('data', data);
+        data.success && dispatch({ type: 'set_buyer', payload: data.buyer });
+        data.success && router.push('/');
+
+        data.error && (responseErrorMessage.current.style.display = 'block');
     };
 
     const addParentPetrolBorder = (e) => {
@@ -84,6 +90,11 @@ const Register = () => {
         countryList.current.style.display = 'block';
     };
 
+    const changeDialingCode = (countryCode) => {
+        setSelectedCountry(countryCode);
+        countryList.current.style.display = 'none';
+    };
+
     useEffect(() => {
         
         setIsNumber(user.mobileNumberOrEmail.split('').every(digit => numbers.includes(digit)));
@@ -91,18 +102,19 @@ const Register = () => {
 
     }, [user.mobileNumberOrEmail]);
 
+    
     useEffect(() => {
         setIsNumber(false);
-
+        
         setSelectedCountry(`${USData.code} ${USData.dialCode}`);
         
     }, []);
-
-    useEffect(() => {
-        selectedCountryForMobileNumber && console.log(selectedCountryForMobileNumber);
-    }, [selectedCountryForMobileNumber]);
-
+    
     useEffect(() => {}, [user.mobileNumberOrEmail]);
+    
+    useEffect(() => {
+        !isNumber && setSelectedCountry('');
+    }, [isNumber]);
 
     return (
         <div className={styles.register}>
@@ -111,9 +123,15 @@ const Register = () => {
                 src='/logos/amazon-logo-bg-white.png'
                 width={130}
                 height={50}
-                style={{ width: "auto" }}
+                style={{ width: "130px", height: '50px' }}
                 alt='Amazon Logo with background white'
+                onClick={() => router.push('/')}
             />
+
+            <div
+                ref={responseErrorMessage}
+                className={styles.responseErrorMessage}
+            >Something went wrong</div>
 
             <form onSubmit={register}>
 
@@ -152,6 +170,7 @@ const Register = () => {
                                 isNumber &&
 
                                 <button
+                                    type='button'
                                     onClick={showCountryList}   
                                 >{selectedCountryForMobileNumber}</button>
                             }
@@ -239,7 +258,7 @@ const Register = () => {
                 </section>
 
                 <section>
-                    <strong>Do you want to sell?</strong>
+                    <strong>Do you want to create a seller account?</strong>
                     <Link href='/frontend/sellers/register'>Create a free seller account</Link>
                 </section>
 
@@ -271,10 +290,13 @@ const Register = () => {
                 className={styles.countryDialingCodes}
                 style={{ width: '220px' }}
                 ref={countryList}
-            >
+                >
                 {
                     countryDialingCodes.map((country, index) => (
-                        <section key={index}>
+                        <section
+                            key={index}
+                            onClick={() => changeDialingCode(`${country.code} ${country.dialCode}`)}
+                        >
                             <p>{country.country}</p>
                             <p>{country.dialCode}</p>
                         </section>

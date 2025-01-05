@@ -11,7 +11,8 @@ export function middleware(req) {
 
             !cookie && pathname !== '/' &&
             !pathname.startsWith('/frontend/sellers/register') &&
-            !pathname.startsWith('/frontend/users/register')
+            !pathname.startsWith('/frontend/users/register') &&
+            !pathname.startsWith('/frontend/users/sign-in')
 
         ) {
         const url = req.nextUrl.clone();
