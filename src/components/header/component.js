@@ -8,6 +8,7 @@ import { showSignInHoverPartnerComponent, hideSignInHoverPartnerComponent } from
 import { useEffect, useContext } from "react";
 import { Context } from "../context-provider/component";
 import { useRouter } from "next/navigation";
+import domainName from "@/lib/domainName";
 
 const Header = () => {
     const { clientDB, dispatch } = useContext(Context);

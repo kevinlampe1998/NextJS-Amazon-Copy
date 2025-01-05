@@ -7,6 +7,7 @@ import { ChevronRight } from 'lucide-react';
 import { useEffect, useState, useRef, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { Context } from '@/components/context-provider/component';
+import domainName from '@/lib/domainName';
 
 const SignIn = () => {
     const [ user, setUser ] = useState({
