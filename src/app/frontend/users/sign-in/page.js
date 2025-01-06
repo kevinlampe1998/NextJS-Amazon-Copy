@@ -77,7 +77,7 @@ const SignIn = () => {
                 src='/logos/amazon-logo-bg-white.png'
                 width={130}
                 height={50}
-                style={{ width: "130px", height: '50px' }}
+                // style={{ width: "130px", height: '50px' }}
                 alt='Amazon Logo with background white'
                 onClick={() => router.push('/')}
             />
