@@ -1,0 +1,22 @@
+.seeProducts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.seeProducts h1 {
+    padding-bottom: 20px;
+}
+
+.seeProducts img {
+    object-fit: contain;
+}
+
+.product {
+    border: 1px solid silver;
+    padding: 20px;
+    margin: 0 0 20px 0;
+    width: 350px;
+    text-align: center;
+}

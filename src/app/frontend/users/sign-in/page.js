@@ -52,12 +52,14 @@ const SignIn = () => {
         data.error && (responseErrorMessage.current.innerHTML = data.message);
         data.error && (responseErrorMessage.current.style.display = 'block');
 
-        data.success && data.user.role === 'seller' &&
-            dispatch({ type: 'set_seller', payload: data.user });
-        data.success && data.user.role === 'buyer' &&
-            dispatch({ type: 'set_buyer', payload: data.user });
-
-        data.success && router.push('/');
+        data.success && data.user.role === 'seller' && (
+            dispatch({ type: 'set_seller', payload: data.user }),
+            router.push('/frontend/sellers/see-my-products')
+        )
+        data.success && data.user.role === 'buyer' && (
+            dispatch({ type: 'set_buyer', payload: data.user }),
+            router.push('/')
+        );
     };
 
     const addParentPetrolBorder = (e) => {

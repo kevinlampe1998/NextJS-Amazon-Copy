@@ -5,7 +5,7 @@ import Image from "next/image";
 import { MapPin, ChevronDown, Search, ShoppingCart } from 'lucide-react';
 import styles from './component.module.css';
 import { showSignInHoverPartnerComponent, hideSignInHoverPartnerComponent } from "../dark-overlay/component";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useRef } from "react";
 import { Context } from "../context-provider/component";
 import { useRouter } from "next/navigation";
 import domainName from "@/lib/domainName";
@@ -13,6 +13,7 @@ import domainName from "@/lib/domainName";
 const Header = () => {
     const { clientDB, dispatch } = useContext(Context);
     const router = useRouter();
+    const headerRef = useRef();
 
     const checkCookieAtStart = async () => {
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/check-cookie`, {
@@ -20,21 +21,25 @@ const Header = () => {
         });
 
         const data = await res.json();
-
+        
         console.log('data', data);
-
+        
         data.success && data.user.role === 'seller' &&
-            dispatch({ type: 'set_seller', payload: data.user });
+        dispatch({ type: 'set_seller', payload: data.user });
         data.success && data.user.role === 'buyer' &&
-            dispatch({ type: 'set_buyer', payload: data.user });
+        dispatch({ type: 'set_buyer', payload: data.user });
     };
 
     useEffect(() => {
         checkCookieAtStart();
     }, []);
+    
+    useEffect(() => {
+        clientDB.seller && (headerRef.current.style.justifyContent = 'space-between');
+    }, [clientDB]);
 
     return (
-        <header className={styles.header}>
+        <header className={styles.header} ref={headerRef}>
 
             <Link
                 href='/'
@@ -48,6 +53,27 @@ const Header = () => {
                     priority
                 />
             </Link>
+            {
+                clientDB.seller &&
+    
+                <div
+                    className={styles.sellerSetProductHeaderButton}
+                    onClick={() => router.push('/frontend/sellers/set-product')}
+                >
+                    Set product
+                </div>
+            }
+
+{
+                clientDB.seller &&
+    
+                <div
+                    className={styles.sellerSetProductHeaderButton}
+                    onClick={() => router.push('/frontend/sellers/see-my-products')}
+                >
+                    See my products
+                </div>
+            }
 
             {
                 !clientDB.seller &&
@@ -143,16 +169,6 @@ const Header = () => {
                 </>
             }
 
-            {
-                clientDB.seller &&
-
-                <div
-                    className={styles.sellerSetProductHeaderButton}
-                    onClick={() => router.push('/frontend/sellers/set-product')}
-                >
-                    Set Product
-                </div>
-            }
 
         </header>
     );

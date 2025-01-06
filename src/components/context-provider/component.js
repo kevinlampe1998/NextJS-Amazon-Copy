@@ -5,9 +5,6 @@ import { createContext } from "react";
 
 const reducer = (state, action) => {
 
-    console.log('action.type', action.type);
-    console.log('action.payload', action.payload);
-
     if (action.type === 'set_seller')
         return { ...state, seller: action.payload };
 
@@ -31,9 +28,9 @@ const ContextProvider = ({ children }) => {
         seller: undefined
     });
 
-    useEffect(() => {
-        console.log('clientDB', clientDB);
-    });
+    // useEffect(() => {
+    //     console.log('clientDB', clientDB);
+    // });
 
     return (
         <Context.Provider value={{ clientDB, dispatch }}>

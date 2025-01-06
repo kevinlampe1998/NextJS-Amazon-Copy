@@ -71,7 +71,7 @@ const Register = () => {
         const data = await res.json();
 
         data.success && dispatch({ type: 'set_seller', payload: data.seller });
-        data.success && router.push('/');
+        data.success && router.push('/frontend/sellers/see-my-products');
 
         data.error && (responseErrorMessage.current.style.display = 'block');
     };
