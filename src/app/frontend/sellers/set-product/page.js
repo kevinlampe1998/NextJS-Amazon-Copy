@@ -52,3 +52,5 @@ export default function ImageUpload() {
         </form>
     );
 }
+
+// comment to push, cause of putting cloudinary env variables to vercel
