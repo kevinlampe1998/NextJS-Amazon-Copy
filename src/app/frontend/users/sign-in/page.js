@@ -79,7 +79,7 @@ const SignIn = () => {
                 height={50}
                 style={{ width: "130px", height: '50px' }}
                 alt='Amazon Logo with background white'
-                // onClick={() => router.push('/')}
+                onClick={() => router.push('/')}
             />
 
             <div

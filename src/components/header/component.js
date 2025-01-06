@@ -143,6 +143,16 @@ const Header = () => {
                 </>
             }
 
+            {
+                clientDB.seller &&
+
+                <div
+                    className={styles.sellerSetProductHeaderButton}
+                    onClick={() => router.push('/frontend/sellers/set-product')}
+                >
+                    Set Product
+                </div>
+            }
 
         </header>
     );

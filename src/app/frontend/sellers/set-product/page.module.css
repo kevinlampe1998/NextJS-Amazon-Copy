@@ -1,0 +1,12 @@
+.setProduct {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.setProduct img {
+    height: 300px;
+    width: 300px;
+    object-fit: contain;
+}
