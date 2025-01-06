@@ -18,7 +18,7 @@ export function middleware(req) {
 
     if (
 
-            !cookie && pathname !== '/' &&
+            !cookie && pathname === '/' &&
             !pathname.startsWith('/frontend/sellers/register') &&
             !pathname.startsWith('/frontend/users/register') &&
             !pathname.startsWith('/frontend/users/sign-in')
