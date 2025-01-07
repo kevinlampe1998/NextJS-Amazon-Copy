@@ -5,6 +5,7 @@ import { Context } from "@/components/context-provider/component";
 import styles from './page.module.css';
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import domainName from "@/lib/domainName";
 
 const SeeProducts = () => {
     const [ products, setProducts ] = useState();
