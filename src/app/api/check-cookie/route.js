@@ -18,6 +18,9 @@ export const GET = async (req) => {
         const searchedUser = await User.findOne({ _id: userCookie.value });
         console.log('searchedUser', searchedUser);
 
+        if (!searchedUser)
+            return res({ message: '/api/checkCookie no user found!', error: 1 });
+
         searchedUser.password = undefined;
 
         return res({ message: 'Checking cookies successful', success: 1, user: searchedUser });
@@ -26,7 +29,7 @@ export const GET = async (req) => {
 
         console.log('Error on POST Route /api/checkCookie', err);
         console.log('Error on POST Route /api/checkCookie');
-        return res({ message: 'Error on POST Route /sellers/register!', error: 1 });
+        return res({ message: 'Error on POST Route /api/checkCookie!', error: 1 });
 
     }
 };
