@@ -9,6 +9,7 @@ import categories from '@/lib/categories';
 import domainName from '@/lib/domainName';
 import { useRouter } from 'next/navigation';
 import correctPrice from '@/lib/correctPrice';
+import domainName from "@/lib/domainName";
 
 const SingleProduct = () => {
     const { id } = useParams();
