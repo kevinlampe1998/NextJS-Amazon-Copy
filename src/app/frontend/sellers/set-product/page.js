@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styles from './page.module.css';
 import { Context } from '@/components/context-provider/component';
 import categories from '@/lib/categories';
 import domainName from '@/lib/domainName';
 import { useRouter } from 'next/navigation';
+import correctPrice from '@/lib/correctPrice';
 
 export default function SetProduct() {
     const [ image, setImage ] = useState(null);
@@ -16,15 +17,19 @@ export default function SetProduct() {
         product_name: '',
         main_image: '',
         description: '',
-        price: '',
+        price: '0,00',
         condition: '',
         category: '',
         subcategory: ''
     });
-    const { clientDB, dispatch } = useContext(Context);
     const [ imageUploaded, setImageUploaded ] = useState(false);
+    const { clientDB, dispatch } = useContext(Context);
     const [ loading, setLoading ] = useState();
     const router = useRouter();
+
+    const handlePrice = (event) => {
+      setProduct(prev => ({ ...prev, price: correctPrice(event.target.value) }));
+    };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -183,7 +188,12 @@ export default function SetProduct() {
 
                     <div>
                         <label>Price</label>
-                        <input required type="text" value={product.price} onChange={(e) => setProduct((prev) => ({ ...prev, price: e.target.value }))}/>
+                        <input
+                            required
+                            type="text"
+                            value={product.price}
+                            onChange={handlePrice}
+                        />
                     </div>
 
                     <button type='submit'>Submit</button>

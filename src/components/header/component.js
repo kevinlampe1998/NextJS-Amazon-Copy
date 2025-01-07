@@ -55,24 +55,24 @@ const Header = () => {
             </Link>
             {
                 clientDB.seller &&
-    
-                <div
-                    className={styles.sellerSetProductHeaderButton}
-                    onClick={() => router.push('/frontend/sellers/set-product')}
-                >
-                    Set product
-                </div>
-            }
 
-{
-                clientDB.seller &&
-    
-                <div
-                    className={styles.sellerSetProductHeaderButton}
-                    onClick={() => router.push('/frontend/sellers/see-my-products')}
-                >
-                    See my products
+                <div className={styles.sellerNav}>
+
+                    <div
+                        className={styles.sellerSetProductHeaderButton}
+                        onClick={() => router.push('/frontend/sellers/see-my-products')}
+                    >
+                        See my products
+                    </div>
+                    <div
+                        className={styles.sellerSetProductHeaderButton}
+                        onClick={() => router.push('/frontend/sellers/set-product')}
+                    >
+                        Set a product
+                    </div>
+                
                 </div>
+    
             }
 
             {

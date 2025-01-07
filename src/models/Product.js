@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   main_image: { type: mongoose.Schema.Types.ObjectId, ref: 'Image', required: true },
   additional_images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }],
   description: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: String, required: true },
   condition: { type: String, enum: ['New', 'Used'], required: true },
   category: {
     type: String,

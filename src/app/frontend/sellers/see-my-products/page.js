@@ -4,11 +4,13 @@ import { useEffect, useState, useContext } from "react";
 import { Context } from "@/components/context-provider/component";
 import styles from './page.module.css';
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const SeeProducts = () => {
     const [ products, setProducts ] = useState();
     const { clientDB, dispatch } = useContext(Context);
     const [ loading, setLoading ] = useState(true);
+    const router = useRouter();
 
     const fetchProducts = async () => {
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/products/read-all`, {
@@ -37,7 +39,11 @@ const SeeProducts = () => {
                 <div className={styles.products}>
                     {
                         products.map(product => (
-                            <div key={product._id} className={styles.product}>
+                            <div
+                                key={product._id}
+                                className={styles.product}
+                                onClick={() => router.push(`/frontend/sellers/see-my-products/single-product/${product._id}`)}
+                            >
                                 <h3>{product.product_name}</h3>
                                 <Image
                                     width='200'
