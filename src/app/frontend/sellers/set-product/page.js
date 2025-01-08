@@ -125,6 +125,7 @@ export default function SetProduct() {
                             <img 
                                 src={imagePreview} 
                                 alt="Preview"
+                                maxwidth={600}
                             />
                         )}
                     </div>
