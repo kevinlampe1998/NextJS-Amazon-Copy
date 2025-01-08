@@ -86,6 +86,7 @@ const postSingleSeller = async (payload) => {
     });
     const data = await res.json();
     console.log(data);
+    return data.success ? true : false;
 };
 
 const registerAllSellers = async () => {
@@ -93,7 +94,7 @@ const registerAllSellers = async () => {
         const results = await Promise.all(
             exampleSeller.map((seller) => postSingleSeller(seller))
         );
-        console.log('All sellers are successfully with the registration!', results);
+        console.log('Here are the results!', results);
     } catch (error) {
         console.error('Error registration of all example seller:', error);
     }

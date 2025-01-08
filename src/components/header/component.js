@@ -7,12 +7,14 @@ import styles from './component.module.css';
 import { showSignInHoverPartnerComponent, hideSignInHoverPartnerComponent } from "../dark-overlay/component";
 import { useEffect, useContext, useRef } from "react";
 import { Context } from "../context-provider/component";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import domainName from "@/lib/domainName";
+
 
 const Header = () => {
     const { clientDB, dispatch } = useContext(Context);
     const router = useRouter();
+    const pathname = usePathname();
     const headerRef = useRef();
 
     const checkCookieAtStart = async () => {
@@ -37,6 +39,11 @@ const Header = () => {
     useEffect(() => {
         clientDB.seller && (headerRef.current.style.justifyContent = 'space-between');
     }, [clientDB]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
 
     return (
         <header className={styles.header} ref={headerRef}>

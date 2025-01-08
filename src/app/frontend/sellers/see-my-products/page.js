@@ -22,6 +22,8 @@ const SeeProducts = () => {
 
         console.log('data fetchProducts', data);
 
+        data.success & data.products.reverse();
+
         data.success && setProducts(data.products);
         data.success && setLoading(false);
     };

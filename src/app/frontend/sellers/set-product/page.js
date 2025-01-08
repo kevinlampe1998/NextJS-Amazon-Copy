@@ -51,6 +51,7 @@ export default function SetProduct() {
         event.preventDefault();
 
         setLoading(true);
+        window.scrollTo(0, 0);
     
         const response = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/images/create`, {
           method: 'POST',
