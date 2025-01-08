@@ -74,6 +74,8 @@ const Register = () => {
         data.success && router.push('/frontend/sellers/see-my-products');
 
         data.error && (responseErrorMessage.current.style.display = 'block');
+        data.error && (responseErrorMessage.current.innerHTML = data.message);
+        
     };
 
     const addParentPetrolBorder = (e) => {

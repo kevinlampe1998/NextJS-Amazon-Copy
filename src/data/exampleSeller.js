@@ -79,24 +79,4 @@ const exampleSeller = [
     },
 ];
 
-const postSingleSeller = async (payload) => {
-    const res = await fetch('https://next-js-amazon-copy.vercel.app/api/sellers/register', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    console.log(data);
-};
-
-const registerAllSellers = async () => {
-    try {
-        const results = await Promise.all(
-            exampleSeller.map((seller) => postSingleSeller(seller))
-        );
-        console.log('All sellers are successfully with the registration!', results);
-    } catch (error) {
-        console.error('Error registration of all example seller:', error);
-    }
-};
-
-registerAllSellers();
+export default exampleSeller;

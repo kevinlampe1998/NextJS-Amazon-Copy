@@ -20,6 +20,22 @@ export const POST = async (req) => {
         const mobileNumber = (isNumber ? mobileNumberOrEmail : ''); 
         const email = (isEmail ? mobileNumberOrEmail : '');
 
+        if (isEmail) {
+            const alreadyExists = await User.findOne({ email });
+            if (alreadyExists) {
+                console.log('alreadyExists', alreadyExists);    
+                return NextResponse.json({ message: 'Email address exists already', error: 1 });
+            }
+        }
+
+        if (isNumber) {
+            const alreadyExists = await User.findOne({ mobileNumber });
+            if (alreadyExists) {
+                console.log('alreadyExists', alreadyExists);
+                return NextResponse.json({ message: 'Mobile number address exists already', error: 1 });
+            }
+        }
+
         const newSeller = new User({ role: 'seller', name, password, mobileNumber, countryDialingCode, email });
 
         const seller = await newSeller.save();
