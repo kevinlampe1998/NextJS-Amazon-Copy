@@ -1,6 +1,7 @@
 import res from "@/lib/res";
 import Product from "@/models/Product";
 import Image from "@/models/Image";
+import User from "@/models/User";
 
 export const POST = async (req) => {
     try {
@@ -12,6 +13,7 @@ export const POST = async (req) => {
         console.log('sellerId', sellerId);
 
         if (!sellerId) {
+            console.log('req has undefined sellerId');
             return res({ message: 'req has undefined sellerId', error: 1 });
         }
 
@@ -20,6 +22,7 @@ export const POST = async (req) => {
         console.log('products', products);
 
         if (!products[0]) {
+            console.log('No products found!');
             return res({ message: 'No products found!', error: 1 });
         }
 

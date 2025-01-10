@@ -14,6 +14,8 @@ const SeeProducts = () => {
     const router = useRouter();
 
     const fetchProducts = async () => {
+        console.log('sellerId fetchProducts read-all', clientDB.seller._id);
+
         const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/sellers/products/read-all`, {
             method: 'POST', headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ sellerId: clientDB.seller._id })
@@ -41,7 +43,7 @@ const SeeProducts = () => {
 
                 <div className={styles.products}>
                     {
-                        products.map(product => (
+                        products && products.map(product => (
                             <div
                                 key={product._id}
                                 className={styles.product}
