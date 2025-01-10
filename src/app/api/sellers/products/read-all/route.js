@@ -10,6 +10,10 @@ export const POST = async (req) => {
 
         const { sellerId } = body;
 
+        if (!sellerId) {
+            return res({ message: 'req has undefined sellerId', error: 1 });
+        }
+
         const products = await Product.find({ seller: sellerId })
             .populate('main_image');
         console.log('products', products);

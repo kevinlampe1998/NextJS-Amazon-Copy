@@ -150,7 +150,7 @@ const SingleProduct = () => {
 
                     : loading
 
-                    ?  <div>... loading</div>
+                    ?  <div className={styles.loading}>... loading</div>
 
                     : (update && product)
 

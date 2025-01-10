@@ -89,3 +89,7 @@
     border: 1px solid silver;
     padding: 5px;
 }
+
+.loading {
+    padding-top: 20px;
+}
