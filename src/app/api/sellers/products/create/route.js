@@ -1,5 +1,7 @@
 import res from "@/lib/res";
 import Product from "@/models/Product";
+import User from "@/models/User";
+import Image from "@/models/Image";
 
 export const POST = async (req) => {
         try {
@@ -11,6 +13,7 @@ export const POST = async (req) => {
             console.log('newProduct', newProduct);
 
             const savedProduct = await newProduct.save();
+            console.log('savedProduct', savedProduct);
     
             return res({ message: 'Product successfully saved!', success: 1 });
     

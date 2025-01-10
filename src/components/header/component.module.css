@@ -70,11 +70,12 @@
 }
 
 .headerSignIn {
-    width: 150px;
+    min-width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
 }
 
 .headerSignIn div {

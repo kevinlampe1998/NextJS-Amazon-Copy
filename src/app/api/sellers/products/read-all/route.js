@@ -9,6 +9,7 @@ export const POST = async (req) => {
         console.log(body);
 
         const { sellerId } = body;
+        console.log('sellerId', sellerId);
 
         if (!sellerId) {
             return res({ message: 'req has undefined sellerId', error: 1 });
@@ -17,6 +18,10 @@ export const POST = async (req) => {
         const products = await Product.find({ seller: sellerId })
             .populate('main_image');
         console.log('products', products);
+
+        if (!products[0]) {
+            return res({ message: 'No products found!', error: 1 });
+        }
 
         return res({ message: 'Here are your products!', success: 1, products });
 
