@@ -12,6 +12,7 @@ const SeeProducts = () => {
     const { clientDB, dispatch } = useContext(Context);
     const [ loading, setLoading ] = useState(true);
     const router = useRouter();
+    const [ resError, setResError ] = useState();
 
     const fetchProducts = async () => {
         console.log('sellerId fetchProducts read-all', clientDB.seller._id);
@@ -24,10 +25,13 @@ const SeeProducts = () => {
 
         console.log('data fetchProducts', data);
 
-        data.success & data.products.reverse();
+        data.success && data.products.reverse();
 
         data.success && setProducts(data.products);
         data.success && setLoading(false);
+
+        data.error && setLoading(false);
+        data.error && setResError(true);
     };
 
     useEffect(() => {
@@ -62,6 +66,12 @@ const SeeProducts = () => {
                         ))
                     }
                 </div>
+             }
+
+             {
+                !loading && resError &&
+
+                <div>Unfortunately, no products were found, or none have been uploaded yet.</div>
              }
         </div>
     );
