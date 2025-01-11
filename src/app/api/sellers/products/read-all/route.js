@@ -19,7 +19,10 @@ export const POST = async (req) => {
         }
 
         const products = await Product.find({ seller: sellerId })
-            .populate('main_image');
+            .populate({
+                path: 'main_image',
+                model: 'Image'
+            });
         console.log('products', products);
 
         if (!products[0]) {
