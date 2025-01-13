@@ -6,19 +6,18 @@ import { useEffect, useContext, useState, useRef } from "react";
 import { Context } from "@/components/context-provider/component";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import domainName from "@/lib/domainName";
 
 export default function Home() {
   const { clientDB, dispatch } = useContext(Context);
   const router = useRouter();
   const [ allProducts, setAllProducts ] = useState();
   const [ slideShowPics, setSlideShowPics ] = useState();
-  const [ slideShowText, setSlideShowText ] = useState([
-    '', ''
-  ]);
   const slideShow = useRef();
   const [slideShowLeftPosition, setSlideShowLeftPosition] = useState(3750);
   const chevronLeft = useRef();
   const chevronRight = useRef();
+  const [ firstArea1, setFirstArea1 ] = useState();
 
   const getAllProducts = async () => {
     const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/home`);
@@ -30,14 +29,17 @@ export default function Home() {
       setAllProducts(data.products);
 
       const preSlideShowPics = [];
-      
       while (preSlideShowPics.length < 6) {
         preSlideShowPics.push(data.products[parseInt(Math.random() * (data.products.length - 1))].main_image.url);
       }
-
-      console.log('preSlideShowPics', preSlideShowPics);
-
       setSlideShowPics(preSlideShowPics);
+
+      const preFirstArea1 = [];
+      while (preFirstArea1.length < 6) {
+        preFirstArea1.push(data.products[parseInt(Math.random() * (data.products.length - 1))]);
+      }
+      setFirstArea1(preFirstArea1);
+
     }
     
   };
@@ -190,7 +192,18 @@ export default function Home() {
 
 
       </section>
-      <section className={styles.adverts}></section>
+      <section className={styles.adverts}>
+
+        <div className={styles.firstArea}>
+          <div>
+            <h2>Top Deals</h2>
+          </div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+      </section>
     </div>
   );
 }

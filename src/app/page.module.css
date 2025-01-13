@@ -90,3 +90,16 @@
     top: 250px;
     z-index: 30;
  }
+
+ .firstArea {
+    height: 420px;
+    background: #333;
+    display: flex;
+    gap: 17px;
+ }
+
+ .firstArea > div {
+    width: 350px;
+    height: 100%;
+    background: #fff;
+ }
