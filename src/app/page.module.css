@@ -1,0 +1,92 @@
+.home {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 1500px;
+    min-height: 2000px;
+}
+
+.backgroundSlideshow {
+    width: 9000px;
+    height: 800px;
+    position: relative;
+    left: 3750px;
+    display: flex;
+    transition: 0.5s;
+}
+
+.slideElement {
+    width: 1500px;
+    height: 600px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.slideElement > div {
+    z-index: 20;
+    padding-top: 70px;
+    color: #fff;
+}
+
+.slideElement > div > h1 {
+    font-size: 4rem;
+    font-weight: bolder;
+}
+
+.slideElement > img {
+    position: absolute;
+    opacity: 1.5;
+    object-fit: cover;
+}
+
+.slideShowDarkOverlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.5;
+}
+
+.slideShowLightOverlayGradient {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    background: linear-gradient(to bottom, transparent, #fff);
+    /* opacity: 0.5; */
+    z-index: 10;
+}
+
+.chevronLeft, .chevronRight {
+    position: absolute;
+    z-index: 20;
+    color: #fff;
+    height: 250px;
+    width: 70px;
+}
+
+.chevronLeft:hover, .chevronRight:hover {
+    border: 1px solid #fff;
+}
+
+.chevronLeft {
+    left: 0;
+    color: rgba(18, 25, 33, 1);
+}
+
+.chevronRight {
+    right: 0;
+}
+
+.adverts {
+    position: absolute;
+    left: 25px;
+    background: silver;
+    width: 1450px;
+    min-height: 800px;
+    top: 250px;
+    z-index: 30;
+ }

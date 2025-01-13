@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "@/components/header/component";
 import ContextProvider from "@/components/context-provider/component";
 import DarkOverlay from "@/components/dark-overlay/component";
+import Header2 from "@/components/header2/component";
 
 export const metadata = {
   title: "Create Next App",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <ContextProvider>
           <Header/>
+          <Header2/>
 
           <main>
             {children}
