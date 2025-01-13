@@ -26,18 +26,32 @@ export default function Home() {
 
 
     if (data.success) {
-      setAllProducts(data.products);
+      
+      const products = data.products;
+      const essentialProducts = products.filter(product =>
+        product.category !== 'Health & Household' && product.subcategory !== 'Pet Health Products');
+      setAllProducts(essentialProducts);
+
+      const booksAndAudible = products.filter(product => product.category === 'Books & Audible');
+      const beautyAndPersonalCare = products.filter(product => product.category === 'Beauty & Personal Care');
+      const kitchenAndDining =  products.filter(product => product.subcategory === 'Kitchen & Dining');
+      const toys = products.filter(product =>
+        product.category === 'Toys & Games' && product.subcategory !== 'Board Games');
 
       const preSlideShowPics = [];
-      while (preSlideShowPics.length < 6) {
-        preSlideShowPics.push(data.products[parseInt(Math.random() * (data.products.length - 1))].main_image.url);
-      }
+      preSlideShowPics.push(products[parseInt(Math.random() * (products.length - 1))].main_image.url);
+      preSlideShowPics.push(products[parseInt(Math.random() * (products.length - 1))].main_image.url);
+      preSlideShowPics.push(booksAndAudible[parseInt(Math.random() * (booksAndAudible.length - 1))].main_image.url);
+      preSlideShowPics.push(beautyAndPersonalCare[parseInt(Math.random() * (beautyAndPersonalCare.length - 1))].main_image.url);
+      preSlideShowPics.push(kitchenAndDining[parseInt(Math.random() * (kitchenAndDining.length - 1))].main_image.url);
+      preSlideShowPics.push(toys[parseInt(Math.random() * (toys.length - 1))].main_image.url);
       setSlideShowPics(preSlideShowPics);
 
       const preFirstArea1 = [];
-      while (preFirstArea1.length < 6) {
-        preFirstArea1.push(data.products[parseInt(Math.random() * (data.products.length - 1))]);
+      while (preFirstArea1.length < 4) {  
+        preFirstArea1.push(products[parseInt(Math.random() * (products.length - 1))]);
       }
+      console.log('preFirstArea1', preFirstArea1);
       setFirstArea1(preFirstArea1);
 
     }
