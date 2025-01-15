@@ -8,6 +8,12 @@
     min-height: 2000px;
 }
 
+.home img {
+   object-fit: cover;
+}
+
+/* ---------- slideshow ------------------------------------------------------------------ */
+
 .backgroundSlideshow {
     width: 9000px;
     height: 800px;
@@ -81,6 +87,8 @@
     right: 0;
 }
 
+/* ---------- adverts ------------------------------------------------------------------ */
+
 .adverts {
     position: absolute;
     left: 25px;
@@ -91,6 +99,8 @@
     z-index: 30;
  }
 
+/* ---------- firstArea ------------------------------------------------------------------ */
+
  .firstArea {
     height: 420px;
     background: #333;
@@ -98,8 +108,140 @@
     gap: 17px;
  }
 
+ 
+
  .firstArea > div {
     width: 350px;
     height: 100%;
+ }
+ 
+ .firstArea1 {
+     padding: 20px 20px 20px 20px;
+     position: relative;
     background: #fff;
+ }
+
+ .firstArea1 h2 {
+    font-size: 1.7rem;
+ }
+
+ .firstArea1 > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+ }
+
+ .firstArea1 > div > div {
+    margin: 5px 0;
+ }
+
+ .firstArea1 > div > div > div {
+    display: flex;
+    align-items: center;
+    height: 30px;
+ }
+
+ .firstArea1 > div > div > div > span {
+    background: rgb(204,12,57);
+    height: 25px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-right: 5px;
+ }
+
+ .firstArea1 > div > div > div > div {
+    color: rgb(204,12,57);
+    font-weight: bold;
+ }
+
+ .firstArea1 > a {
+    position: absolute;
+    bottom: 20px;
+    font-size: 1.1rem;
+    color: #07c;
+    text-decoration: none;
+ }
+
+ .firstArea1 > a:hover {
+    color: #00f;
+ }
+
+ .firstArea3 {
+    padding: 20px 20px 20px 20px;
+    position: relative;
+    background: #fff;
+ }
+
+ .firstArea3 h2 {
+    font-size: 1.7rem;
+ }
+
+.firstArea3 img {
+    margin-top: 5px;
+}
+
+ .firstArea3 > a {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.1rem;
+    color: #07c;
+    text-decoration: none;
+ }
+
+ .firstArea3 > a:hover {
+    color: #00f;
+ }
+
+ .firstArea4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+ }
+    
+.firstArea4 > div:first-child {
+    padding: 20px 20px 20px 20px;
+    width: 100%;
+    height: 150px;
+    border: 1px solid black;
+    background: #fff;
+ }
+
+ .firstArea4 > div:first-child > h2 {
+    font-size: 1.7rem;
+    margin-bottom: 4px;
+ }
+
+ .firstArea4 > div:first-child > button {
+    width: 100%;
+    height: 30px;
+    margin-top: 17px;
+    background: rgba(254, 216,19, 1);
+    border-radius: 30px;
+    border: none;
+ }
+
+ .firstArea4 > div:nth-child(2) {
+    background: rgb(108,155,137);
+    width: 300px;
+    height: 245px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+ }
+
+ .firstArea4 > div:nth-child(2) h3 {
+   font-size: 1.5rem;
+ }
+
+ .firstArea4 > div:nth-child(2) img {
+   border-radius: 5px;
+   position: relative;
+   top: 50px;
+   transform: rotate(10deg);
  }

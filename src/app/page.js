@@ -7,6 +7,7 @@ import { Context } from "@/components/context-provider/component";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import domainName from "@/lib/domainName";
+import Link from "next/link";
 
 export default function Home() {
   const { clientDB, dispatch } = useContext(Context);
@@ -17,7 +18,11 @@ export default function Home() {
   const [slideShowLeftPosition, setSlideShowLeftPosition] = useState(3750);
   const chevronLeft = useRef();
   const chevronRight = useRef();
+  
   const [ firstArea1, setFirstArea1 ] = useState();
+  const [ firstArea2, setFirstArea2 ] = useState();
+  const [ firstArea3, setFirstArea3 ] = useState();
+  const [ firstArea4, setFirstArea4 ] = useState();
 
   const getAllProducts = async () => {
     const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/home`);
@@ -29,7 +34,9 @@ export default function Home() {
       
       const products = data.products;
       const essentialProducts = products.filter(product =>
-        product.category !== 'Health & Household' && product.subcategory !== 'Pet Health Products');
+        product.category !== 'Health & Household' &&
+        product.subcategory !== 'Vitamins & Supplements' &&
+        product.subcategory !== 'Pet Health Products');
       setAllProducts(essentialProducts);
 
       const booksAndAudible = products.filter(product => product.category === 'Books & Audible');
@@ -37,6 +44,12 @@ export default function Home() {
       const kitchenAndDining =  products.filter(product => product.subcategory === 'Kitchen & Dining');
       const toys = products.filter(product =>
         product.category === 'Toys & Games' && product.subcategory !== 'Board Games');
+      const electronicsAndComputers = products.filter(product => product.category === 'Electronics & Computers');
+      const fashion =  products.filter(product => product.subcategory === 'Men’s Clothing' ||
+        product.subcategory === 'Women’s Clothing' || product.subcategory === 'Kids’ Clothing' ||
+        product.subcategory === 'Shoes'
+      );
+      const sportsAndOutdoors = products.filter(product => product.category === 'Sports & Outdoors');
 
       const preSlideShowPics = [];
       preSlideShowPics.push(products[parseInt(Math.random() * (products.length - 1))].main_image.url);
@@ -51,8 +64,19 @@ export default function Home() {
       while (preFirstArea1.length < 4) {  
         preFirstArea1.push(products[parseInt(Math.random() * (products.length - 1))]);
       }
-      console.log('preFirstArea1', preFirstArea1);
       setFirstArea1(preFirstArea1);
+
+      const preFirstArea2 = [];
+      preFirstArea2.push(electronicsAndComputers[parseInt(Math.random() * (electronicsAndComputers.length - 1))]);
+      preFirstArea2.push(kitchenAndDining[parseInt(Math.random() * (kitchenAndDining.length - 1))]);
+      preFirstArea2.push(fashion[parseInt(Math.random() * (fashion.length - 1))]);
+      preFirstArea2.push(sportsAndOutdoors[parseInt(Math.random() * (sportsAndOutdoors.length - 1))]);
+      setFirstArea2(preFirstArea2);
+
+      setFirstArea3(products[parseInt(Math.random() * (products.length - 1))]);
+
+      setFirstArea4(products[parseInt(Math.random() * (products.length - 1))]);
+
 
     }
     
@@ -209,14 +233,122 @@ export default function Home() {
       <section className={styles.adverts}>
 
         <div className={styles.firstArea}>
-          <div>
-            <h2>Top Deals</h2>
-          </div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
 
+          {
+            firstArea1 &&
+
+            <div
+              className={styles.firstArea1}
+            >
+              <h2>Top Deals</h2>
+
+              <div>
+                {
+                  firstArea1.map(product => (
+
+                    <div key={product._id}>
+                      <Image
+                        src={product.main_image.url}
+                        width={140}
+                        height={120}
+                        style={{ width: '140', height: '120' }}
+                        alt={product.product_name}
+                      />
+                      <div>
+                        <span>30% off</span>
+                        <div>
+                          <p>Limited time</p>
+                          <p>deal</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              
+
+              <Link href='#'>Shop more deals</Link>
+
+            </div>
+          }
+
+          {
+            firstArea2 &&
+
+              <div
+                className={styles.firstArea1}
+              >
+                <h2>New to Amazon?</h2>
+
+                <div>
+                  {
+                    firstArea2.map(product => (
+
+                      <div key={product._id}>
+                        <Image
+                          src={product.main_image.url}
+                          width={140}
+                          height={120}
+                          style={{ width: '140', height: '120' }}
+                          alt={product.product_name}
+                        />
+                        <div>
+                          {product.category}
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+                
+
+                <Link href='#'>Explore all categories</Link>
+
+              </div>
+          }
+
+
+          {
+            firstArea3 &&
+
+            <div className={styles.firstArea3}>
+              <h2>New year deals, new year feels</h2>
+              <Image
+                src={firstArea3.main_image.url}
+                width={310}
+                height={315}
+                style={{ width: '100%', height: '315px' }}
+                alt={firstArea3.product_name}
+              />
+              <Link href='#'>See more</Link>
+            </div>
+          }
+
+          {
+            firstArea4 &&
+
+              <div className={styles.firstArea4}>
+                <div>
+                  <h2>Sign in for your best</h2>
+                  <h2>experience</h2>
+                  <button>Sign in securely</button>
+                </div>
+                <div>
+                  <h3>Find Gifts for everyone</h3>
+                  <Image
+                    src={firstArea4?.main_image?.url}
+                    width={200}
+                    height={100}
+                    style={{ width: '200', height: '100px' }}
+                    alt={firstArea3.product_name}
+                  />
+                </div>
+              </div>
+
+}
+
+
+
+        </div>
       </section>
     </div>
   );
