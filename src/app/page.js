@@ -8,6 +8,8 @@ import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import domainName from "@/lib/domainName";
 import Link from "next/link";
+import automaticDeliveryPic from '/public/pictures/curology-pDsmoI5j3B8-unsplash.jpg';
+import shopInYourCurrencyPic from '/public/pictures/currency-1680786_1920.png';
 
 export default function Home() {
   const { clientDB, dispatch } = useContext(Context);
@@ -23,6 +25,8 @@ export default function Home() {
   const [ firstArea2, setFirstArea2 ] = useState();
   const [ firstArea3, setFirstArea3 ] = useState();
   const [ firstArea4, setFirstArea4 ] = useState();
+  
+  const [ secondArea, setSecondArea ] = useState({ one: 0, two: 0, three: 0, four: 0 });
 
   const getAllProducts = async () => {
     const res = await fetch(`${process.env.NODE_ENV === 'production' ? domainName : ''}/api/home`);
@@ -50,6 +54,8 @@ export default function Home() {
         product.subcategory === 'Shoes'
       );
       const sportsAndOutdoors = products.filter(product => product.category === 'Sports & Outdoors');
+      const homeDecor = products.filter(product => product.subcategory === 'Home Décor');
+      console.log('homeDecor', homeDecor);
 
       const preSlideShowPics = [];
       preSlideShowPics.push(products[parseInt(Math.random() * (products.length - 1))].main_image.url);
@@ -77,7 +83,9 @@ export default function Home() {
 
       setFirstArea4(products[parseInt(Math.random() * (products.length - 1))]);
 
+      setSecondArea(prev => ({ ...prev, one: homeDecor[parseInt(Math.random() * (homeDecor.length - 1))] }));
 
+      setSecondArea(prev => ({ ...prev, three: products[parseInt(Math.random() * (products.length - 1))] }));
     }
     
   };
@@ -121,6 +129,7 @@ export default function Home() {
   }, []);
   
   return (
+  <div className={styles.homeBG}>
     <div className={styles.home}>
       <ChevronLeft size={60} className={styles.chevronLeft} onClick={slideToLeft} ref={chevronLeft}/>
       <ChevronRight size={60} className={styles.chevronRight} onClick={slideToRight} ref={chevronRight}/>
@@ -339,17 +348,86 @@ export default function Home() {
                     width={200}
                     height={100}
                     style={{ width: '200', height: '100px' }}
-                    alt={firstArea3.product_name}
+                    alt={firstArea4.product_name}
                   />
                 </div>
               </div>
 
-}
-
-
+          }
 
         </div>
+
+        <div className={styles.secondArea}>
+
+          {
+            secondArea.one && 
+
+              <div className={styles.secondArea1}>
+                <h2>Home Decor</h2>
+                <Image
+                  src={secondArea.one.main_image.url}
+                  width={310}
+                  height={315}
+                  style={{ width: '100%', height: '315px' }}
+                  alt={secondArea.one.product_name}
+                />
+                <Link href='#'>See more</Link>
+              </div>
+
+          }
+
+          <div className={styles.secondArea2}>
+            <h2>Save up to 15% with automatic</h2>
+            <h2>delivery</h2>
+            <Image
+              src={automaticDeliveryPic}
+              width={310}
+              height={290}
+              style={{ width: '100%', height: '290px' }}
+              alt='automatic delivery picture'
+            />
+            <Link href='#'>Learn more</Link>
+          </div>
+
+          {
+
+            secondArea.three &&
+
+              <div className={styles.secondArea3}>
+                <h2>From want it all to need it now</h2>
+                  <Image
+                    src={secondArea.three.main_image.url}
+                    width={310}
+                    height={315}
+                    style={{ width: '100%', height: '315px' }}
+                    alt={secondArea.three.product_name}
+                  />
+                  <Link href='#'>Shop now</Link>
+              </div>
+            
+          }
+
+          {
+
+              secondArea.three &&
+
+                <div className={styles.secondArea3}>
+                  <h2>From want it all to need it now</h2>
+                    <Image
+                      src={shopInYourCurrencyPic}
+                      width={310}
+                      height={315}
+                      style={{ width: '100%', height: '315px' }}
+                      alt='shop in your currency picture'
+                    />
+                    <Link href='#'>Learn more</Link>
+                </div>
+
+          }
+
+        </div>  
       </section>
     </div>
+   </div>
   );
 }

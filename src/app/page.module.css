@@ -1,3 +1,7 @@
+.homeBG {
+   background: rgb(227,230,230);
+}
+
 .home {
     margin: auto;
     display: flex;
@@ -61,8 +65,7 @@
     height: 100%;
     width: 100%;
     background: #fff;
-    background: linear-gradient(to bottom, transparent, #fff);
-    /* opacity: 0.5; */
+    background: linear-gradient(to bottom, transparent, rgb(227,230,230));
     z-index: 10;
 }
 
@@ -92,7 +95,6 @@
 .adverts {
     position: absolute;
     left: 25px;
-    background: silver;
     width: 1450px;
     min-height: 800px;
     top: 250px;
@@ -101,24 +103,21 @@
 
 /* ---------- firstArea ------------------------------------------------------------------ */
 
- .firstArea {
+ .firstArea, .secondArea {
     height: 420px;
-    background: #333;
     display: flex;
     gap: 17px;
  }
 
- 
-
- .firstArea > div {
+ .firstArea > div, .secondArea > div {
     width: 350px;
     height: 100%;
  }
  
  .firstArea1 {
-     padding: 20px 20px 20px 20px;
-     position: relative;
-    background: #fff;
+   padding: 20px;
+   position: relative;
+   background: #fff;
  }
 
  .firstArea1 h2 {
@@ -206,8 +205,7 @@
 .firstArea4 > div:first-child {
     padding: 20px 20px 20px 20px;
     width: 100%;
-    height: 150px;
-    border: 1px solid black;
+    height: 140px;
     background: #fff;
  }
 
@@ -245,3 +243,94 @@
    top: 50px;
    transform: rotate(10deg);
  }
+
+/* ---------- firstArea ------------------------------------------------------------------ */
+
+.secondArea {
+   margin-top: 20px;
+}
+
+.secondArea > div {
+   background: #fff;
+}
+
+.secondArea1 {
+   padding: 20px 20px 20px 20px;
+   position: relative;
+   background: #fff;
+}
+
+.secondArea1 h2 {
+   font-size: 1.7rem;
+}
+
+.secondArea1 img {
+   margin-top: 5px;
+}
+
+.secondArea1 > a {
+   position: absolute;
+   bottom: 20px;
+   left: 20px;
+   font-size: 1.1rem;
+   color: #07c;
+   text-decoration: none;
+}
+
+.secondArea1 > a:hover {
+   color: #00f;
+}
+
+.secondArea2 {
+   padding: 20px 20px 20px 20px;
+   position: relative;
+   background: #fff;
+}
+
+.secondArea2 h2 {
+   font-size: 1.7rem;
+}
+
+.secondArea2 img {
+   margin-top: 5px;
+}
+
+.secondArea2 > a {
+   position: absolute;
+   bottom: 20px;
+   left: 20px;
+   font-size: 1.1rem;
+   color: #07c;
+   text-decoration: none;
+}
+
+.secondArea2 > a:hover {
+   color: #00f;
+}
+
+.secondArea3 {
+   padding: 20px 20px 20px 20px;
+   position: relative;
+   background: #fff;
+}
+
+.secondArea3 h2 {
+   font-size: 1.7rem;
+}
+
+.secondArea3 img {
+   margin-top: 5px;
+}
+
+.secondArea3 > a {
+   position: absolute;
+   bottom: 20px;
+   left: 20px;
+   font-size: 1.1rem;
+   color: #07c;
+   text-decoration: none;
+}
+
+.secondArea2 > a:hover {
+   color: #00f;
+}
