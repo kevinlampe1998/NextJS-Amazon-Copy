@@ -424,8 +424,14 @@ export default function Home() {
                 </div>
 
           }
+        </div>
 
-        </div>  
+        <div className={styles.thirdArea}>
+          <h2>Best Sellers in Sports & Outdoors</h2>
+          <div>
+            
+          </div>
+        </div>
       </section>
     </div>
    </div>

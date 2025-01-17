@@ -200,13 +200,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
- }
-    
-.firstArea4 > div:first-child {
-    padding: 20px 20px 20px 20px;
-    width: 100%;
-    height: 140px;
-    background: #fff;
+   }
+   
+   .firstArea4 > div:first-child {
+      padding: 20px 20px 20px 20px;
+      width: 100%;
+      height: 140px;
+      background: #fff;
+      overflow: hidden;
  }
 
  .firstArea4 > div:first-child > h2 {
@@ -333,4 +334,16 @@
 
 .secondArea2 > a:hover {
    color: #00f;
+}
+
+/* ---------- firstArea ------------------------------------------------------------------ */
+
+.thirdArea {
+   height: 280px;
+   background: #fff;
+   margin-top: 20px;
+}
+
+.thirdArea > h2 {
+   
 }
